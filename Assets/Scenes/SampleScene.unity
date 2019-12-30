@@ -285,7 +285,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jump: 5
   groundCheck: {fileID: 112171230}
-  groundCheckRadius: 2
+  health: 3
+  groundCheckRadius: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -342,7 +343,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.059448
+  orthographic size: 3.76047
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -386,7 +387,7 @@ GameObject:
   - component: {fileID: 872658179}
   - component: {fileID: 872658180}
   m_Layer: 8
-  m_Name: Square
+  m_Name: Floor
   m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

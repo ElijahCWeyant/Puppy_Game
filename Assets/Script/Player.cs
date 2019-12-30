@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    private Vector2 pos;
     public float jump = 5;
     private Rigidbody2D body;
     public Transform groundCheck;
-
+    public int health = 3;
     public float groundCheckRadius;
 
     public LayerMask whatIsGround;
@@ -17,19 +17,31 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pos = transform.position;
         body = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(health <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
         onGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         // Takes info from the Ground Check object to determine if player is touching ground before jumping
         if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
-            body.velocity = new Vector2(body.velocity.x, jump * Time.deltaTime);
+            body.velocity = new Vector2(body.velocity.x, jump);
             // Won't jump
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D fall)
+    {
+        if (fall.CompareTag("Bottom"))
+        {
+            health = 0;
         }
     }
 }
