@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 161654022}
   - component: {fileID: 161654027}
   m_Layer: 0
-  m_Name: ball_rotate_0
+  m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,8 +183,8 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 70fdc4303cb386a44b4358e86e30683f, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 1
-  m_ApplyRootMotion: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -248,10 +248,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 161654021}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.45, y: 2.57, z: 0}
+  m_LocalPosition: {x: 9.57, y: 0.29, z: 0}
   m_LocalScale: {x: 8.0997, y: 7.4711, z: 1}
   m_Children:
-  - {fileID: 560919212}
+  - {fileID: 2133496824}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -289,9 +289,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0015003266, y: -0.0005423623}
   serializedVersion: 2
-  m_Radius: 0.115
+  m_Radius: 0.105991565
 --- !u!114 &161654027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,10 +306,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xspd: 6
   yspd: 5
-  groundCheck: {fileID: 560919212}
+  groundCheck1: {fileID: 2133496824}
   anim: {fileID: 161654022}
-  groundCheckRadius: 0
-  whatIsGround:
+  damage: 1
+  groundCheckRadius: 0.9
+  whatIsGround1:
     serializedVersion: 2
     m_Bits: 256
 --- !u!1 &341861692
@@ -545,36 +546,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &560919211
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 560919212}
-  m_Layer: 0
-  m_Name: Ground Check
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &560919212
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560919211}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.0210624, y: -0.31454536, z: 0}
-  m_LocalScale: {x: 0.20986208, y: 0.2353375, z: 1}
-  m_Children: []
-  m_Father: {fileID: 161654024}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &872658178
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +662,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0fd8f9fd46d3730469dd7c36649fe12e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3916a0c79d5f434f9f767b822c2ae24, type: 3}
   m_Color: {r: 0.5283019, g: 0.29156286, b: 0.29156286, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -710,9 +681,39 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872658178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.662, y: -3.083, z: 0}
-  m_LocalScale: {x: 32.22475, y: 4.1604877, z: 1}
+  m_LocalPosition: {x: 4.771, y: -3.083, z: 0}
+  m_LocalScale: {x: 30.452389, y: 4.1604877, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2133496823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2133496824}
+  m_Layer: 0
+  m_Name: Ground Check1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2133496824
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133496823}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.4421793, y: 0.5313924, z: 1}
+  m_Children: []
+  m_Father: {fileID: 161654024}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

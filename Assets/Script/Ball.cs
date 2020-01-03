@@ -7,12 +7,12 @@ public class Ball : MonoBehaviour
     public float xspd = 6;
     public float yspd = 5;
     private Rigidbody2D body;
-    public Transform groundCheck;
+    public Transform groundCheck1;
     public Animator anim;
-
+    public int damage = 1;
     public float groundCheckRadius;
 
-    public LayerMask whatIsGround;
+    public LayerMask whatIsGround1;
 
     private bool onGround;
     // Start is called before the first frame update
@@ -26,15 +26,30 @@ public class Ball : MonoBehaviour
     {
         transform.Translate(Vector2.left * xspd * Time.deltaTime);
 
-        onGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        onGround = Physics2D.OverlapCircle(groundCheck1.position, groundCheckRadius, whatIsGround1);
         if (onGround)
         {
             anim.SetBool("Ground", true);
-            body.velocity = new Vector2(body.velocity.x, yspd);
+            StartCoroutine(jump());
         }
         else
         {
             anim.SetBool("Ground", false);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            collision.GetComponent<Player>().health -= damage;
+            Destroy(gameObject);
+        }
+    }
+
+    public IEnumerator jump()
+    {
+        yield return new WaitForSeconds(0.3f);
+        body.velocity = new Vector2(body.velocity.x, yspd);
     }
 }
