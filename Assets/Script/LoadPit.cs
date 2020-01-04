@@ -5,6 +5,7 @@ using UnityEngine;
 public class LoadPit : MonoBehaviour
     //To determine where the pit should be in the scene
 {
+
     // Start is called before the first frame update
     void Start()
     {
