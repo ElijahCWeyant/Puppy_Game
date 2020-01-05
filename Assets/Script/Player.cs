@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public int health = 3;
     public float groundCheckRadius;
     public Animator anim;
+    private bool jumping = false;
 
     public LayerMask whatIsGround;
 
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if(health <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -34,9 +36,18 @@ public class Player : MonoBehaviour
         // Takes info from the Ground Check object to determine if player is touching ground before jumping
         if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
-            body.velocity = new Vector2(body.velocity.x, jump);
- 
+            
+            StartCoroutine(wait());
         }
+        else if (jumping && onGround)
+        {
+            anim.SetBool("Jump", true);
+        }
+        else
+        {
+            anim.SetBool("Jump", !onGround);
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D fall)
@@ -46,7 +57,14 @@ public class Player : MonoBehaviour
             health = 0;
         }
     }
-
+    public IEnumerator wait()
+    {
+        jumping = true;
+        anim.SetBool("Jump", true);
+        yield return new WaitForSeconds(0.2f);
+        body.velocity = new Vector2(body.velocity.x, jump);
+        jumping = false;
+    }
 
 
 }
