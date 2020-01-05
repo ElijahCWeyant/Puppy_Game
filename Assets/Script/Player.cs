@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public Transform groundCheck;
     public int health = 3;
     public float groundCheckRadius;
+    public Animator anim;
 
     public LayerMask whatIsGround;
 
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
@@ -33,7 +35,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
             body.velocity = new Vector2(body.velocity.x, jump);
-            // Won't jump
+ 
         }
     }
 
@@ -44,4 +46,7 @@ public class Player : MonoBehaviour
             health = 0;
         }
     }
+
+
+
 }
