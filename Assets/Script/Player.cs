@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-
     }
 
     // Update is called once per frame
