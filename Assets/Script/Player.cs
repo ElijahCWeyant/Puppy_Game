@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float groundCheckRadius;
     public Animator anim;
     private bool jumping = false;
+    public int score = 0;
 
     public LayerMask whatIsGround;
 
@@ -22,6 +23,9 @@ public class Player : MonoBehaviour
     public float RelitivePos = 0;
     public float MaxRight = 15;
     private bool onGround;
+
+    public int Score { get => score; set => score = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +46,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
             
-            StartCoroutine(wait());
+            StartCoroutine(Wait());
         }
         else if (jumping && onGround)
         {
@@ -52,43 +56,28 @@ public class Player : MonoBehaviour
         {
             anim.SetBool("Jump", !onGround);
         }
-        if (Input.GetKeyDown(KeyCode.D) && onGround && RelitivePos < MaxRight)
+        if (Input.GetKeyDown(KeyCode.D) && onGround && (RelitivePos < MaxRight))
         {
             RunTo = new Vector2(transform.position.x + run, transform.position.y);
             transform.position = Vector2.MoveTowards(RunTo, transform.position, speed * Time.deltaTime);
             RelitivePos++;
         }
-        else if (Input.GetKeyDown(KeyCode.A) && onGround && RelitivePos > MinRight)
+        else if (Input.GetKeyDown(KeyCode.A) && onGround && (RelitivePos > MinRight))
         {
             RunTo = new Vector2(transform.position.x - run, transform.position.y);
             transform.position = Vector2.MoveTowards(RunTo, transform.position, speed * Time.deltaTime);
             RelitivePos--;
         }
-
-
-        /*
-        transform.position = Vector2.MoveTowards(RunTo, transform.position, speed*Time.deltaTime);
-        if (Input.GetKeyDown(KeyCode.D) && onGround)
-        {
-            RunTo = new Vector2(transform.position.x + run, transform.position.y);
-            
-        }
-        else if (Input.GetKeyDown(KeyCode.A) && onGround)
-        {
-            RunTo = new Vector2(transform.position.x - run, transform.position.y);
-
-        }
-        */
     }
 
-    private void OnTriggerEnter2D(Collider2D fall)
-    {
-        if (fall.CompareTag("Bottom"))
-        {
-            health = 0;
-        }
-    }
-    public IEnumerator wait()
+    //private void OnTriggerEnter2D(Collider2D fall)
+    //{
+    //    if (fall.CompareTag("Bottom"))
+    //    {
+    //        health = 0;
+    //    }
+    //}
+    public IEnumerator Wait()
     {
         jumping = true;
         anim.SetBool("Jump", true);

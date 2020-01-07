@@ -27,7 +27,7 @@ public class Spawner : MonoBehaviour
         {
             float rndx = Random.Range(0, xSpawnVariance);
             float rndy = Random.Range(0, ySpawnVariance);
-            rndPos = new Vector3(rndx, rndy);
+            rndPos = new Vector2(rndx, rndy);
             Instantiate(Ball, transform.position + rndPos, Quaternion.identity);
             timeBtwSpawn = startTimeBtwSpawn;
             if (startTimeBtwSpawn > minTime)
