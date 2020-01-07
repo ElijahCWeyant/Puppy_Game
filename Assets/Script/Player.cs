@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     private bool onGround;
 
     public int Score { get => score; set => score = value; }
-
+    private Vector3 destroy = new Vector2(-15f, -15f);
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +67,11 @@ public class Player : MonoBehaviour
             RunTo = new Vector2(transform.position.x - run, transform.position.y);
             transform.position = Vector2.MoveTowards(RunTo, transform.position, speed * Time.deltaTime);
             RelitivePos--;
+        }
+
+        if (transform.position.x < destroy.x || transform.position.y < destroy.y)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 

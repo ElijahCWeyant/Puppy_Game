@@ -6,7 +6,7 @@ public class Bone : MonoBehaviour
 {
     public float speed = 5;
     public int intrinsic_value = 1;
-
+    private Vector3 destroy = new Vector2(-15f, -15f);
     // Start is called before the first frame update
     void Start()
     {
@@ -17,13 +17,17 @@ public class Bone : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.left * speed * Time.deltaTime);
+        if (transform.position.x <= destroy.x || transform.position.y <= destroy.y)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<Player>().score += intrinsic_value;
+            collision.GetComponent<Player>().health += intrinsic_value;
             Destroy(gameObject);
         }
     }

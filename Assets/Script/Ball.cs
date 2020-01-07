@@ -15,6 +15,7 @@ public class Ball : MonoBehaviour
     public LayerMask whatIsGround1;
 
     private bool onGround;
+    private Vector3 destroy = new Vector2(-15f, -15f);
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,11 @@ public class Ball : MonoBehaviour
         else
         {
             anim.SetBool("Ground", false);
+        }
+
+        if (transform.position.x <= destroy.x || transform.position.y <= destroy.y)
+        {
+            Destroy(gameObject);
         }
     }
 
