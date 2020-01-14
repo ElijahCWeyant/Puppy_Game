@@ -1,2 +1,2 @@
-# Pupper_Game
- Trying to figure how to upload this
+# Puppy_Game
+ A fun, story based "infinite" runner or procedurally generated platformer
