@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     public int health = 3;
     public float groundCheckRadius;
     public Animator anim;
+    private bool jumping = false;
+    public int score = 0;
+
     public LayerMask whatIsGround;
 
     public float run = 1;
@@ -20,16 +23,19 @@ public class Player : MonoBehaviour
     public float RelitivePos = 0;
     public float MaxRight = 15;
     private bool onGround;
+
+    public int Score { get => score; set => score = value; }
+    private Vector3 destroy = new Vector2(-15f, -15f);
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if(health <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -39,46 +45,51 @@ public class Player : MonoBehaviour
         // Takes info from the Ground Check object to determine if player is touching ground before jumping
         if (Input.GetKeyDown(KeyCode.Space) && onGround)
         {
-            body.velocity = new Vector2(body.velocity.x, jump);
- 
+            
+            StartCoroutine(Wait());
         }
-        if (Input.GetKeyDown(KeyCode.D) && onGround && RelitivePos < MaxRight)
+        else if (jumping && onGround)
+        {
+            anim.SetBool("Jump", true);
+        }
+        else
+        {
+            anim.SetBool("Jump", !onGround);
+        }
+        if (Input.GetKeyDown(KeyCode.D) && onGround && (RelitivePos < MaxRight))
         {
             RunTo = new Vector2(transform.position.x + run, transform.position.y);
             transform.position = Vector2.MoveTowards(RunTo, transform.position, speed * Time.deltaTime);
             RelitivePos++;
         }
-        else if (Input.GetKeyDown(KeyCode.A) && onGround && RelitivePos > MinRight)
+        else if (Input.GetKeyDown(KeyCode.A) && onGround && (RelitivePos > MinRight))
         {
             RunTo = new Vector2(transform.position.x - run, transform.position.y);
             transform.position = Vector2.MoveTowards(RunTo, transform.position, speed * Time.deltaTime);
             RelitivePos--;
         }
 
-
-        /*
-        transform.position = Vector2.MoveTowards(RunTo, transform.position, speed*Time.deltaTime);
-        if (Input.GetKeyDown(KeyCode.D) && onGround)
+        if (transform.position.x < destroy.x || transform.position.y < destroy.y)
         {
-            RunTo = new Vector2(transform.position.x + run, transform.position.y);
-            
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        else if (Input.GetKeyDown(KeyCode.A) && onGround)
-        {
-            RunTo = new Vector2(transform.position.x - run, transform.position.y);
-
-        }
-        */
     }
 
-    private void OnTriggerEnter2D(Collider2D fall)
+    //private void OnTriggerEnter2D(Collider2D fall)
+    //{
+    //    if (fall.CompareTag("Bottom"))
+    //    {
+    //        health = 0;
+    //    }
+    //}
+    public IEnumerator Wait()
     {
-        if (fall.CompareTag("Bottom"))
-        {
-            health = 0;
-        }
+        jumping = true;
+        anim.SetBool("Jump", true);
+        yield return new WaitForSeconds(0.2f);
+        body.velocity = new Vector2(body.velocity.x, jump);
+        jumping = false;
     }
-
 
 
 }
